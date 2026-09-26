@@ -1,0 +1,19 @@
+{
+  "name": "wanzzy-serbaguna-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.3.0",
+    "axios": "^1.8.4",
+    "cheerio": "^1.0.0",
+    "express": "^5.1.0",
+    "form-data": "^4.0.2",
+    "multer": "^1.4.5-lts.1",
+    "busboy": "^1.6.0",
+    "qs": "^6.13.0"
+  }
+}
