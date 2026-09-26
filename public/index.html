@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#090714" />
+  <title>WANZZY • MULTI TOOLS</title>
+  <style>
+    :root{--bg:#090714;--card:rgba(18,15,37,.72);--card2:rgba(34,26,65,.74);--line:rgba(255,255,255,.13);--text:#fff;--muted:#c8c3d8;--accent:#c56cff;--accent2:#6e7cff;--danger:#ff5e8b;--shadow:0 24px 80px rgba(0,0,0,.42)}
+    *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text);background:var(--bg)}
+    body{background-image:linear-gradient(180deg,rgba(6,5,17,.56),rgba(6,5,17,.9)),url('/assets/bg.jpg');background-size:cover;background-position:center;background-attachment:fixed}
+    button,input,select,textarea{font:inherit}.hidden{display:none!important}
+    .login{min-height:100vh;display:grid;place-items:center;padding:24px}.login-card{width:min(430px,100%);padding:30px;border:1px solid var(--line);background:rgba(9,7,20,.68);backdrop-filter:blur(20px);border-radius:28px;box-shadow:var(--shadow)}
+    .logo{font-weight:950;letter-spacing:.12em;font-size:28px}.logo span{color:#d995ff}.sub{color:var(--muted);margin:7px 0 25px}.field{margin:14px 0}.field label{display:block;color:#dcd7ea;font-size:13px;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);outline:none;background:rgba(255,255,255,.07);color:white;border-radius:14px;padding:13px 14px}.field textarea{min-height:120px;resize:vertical}.field select option{background:#18132b}
+    .btn{border:0;border-radius:14px;padding:12px 16px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));font-weight:800;cursor:pointer;box-shadow:0 10px 28px rgba(126,91,255,.22);transition:.2s}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.btn.secondary{background:rgba(255,255,255,.08);box-shadow:none;border:1px solid var(--line)}.btn.danger{background:rgba(255,75,122,.16);border:1px solid rgba(255,75,122,.28);box-shadow:none}.error{color:#ff9ab7;font-size:13px;margin-top:10px}
+    .app{display:flex;min-height:100vh}.side{width:260px;flex:none;padding:22px 16px;border-right:1px solid var(--line);background:rgba(8,6,18,.64);backdrop-filter:blur(18px);position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:8px 10px 22px}.brand small{display:block;color:var(--muted);margin-top:4px}.nav{display:grid;gap:8px}.nav button{width:100%;text-align:left;border:1px solid transparent;color:#eee;background:transparent;padding:12px;border-radius:13px;cursor:pointer}.nav button:hover,.nav button.active{background:rgba(255,255,255,.09);border-color:var(--line)}.nav .ico{display:inline-grid;place-items:center;width:28px;margin-right:7px}.side-foot{margin-top:20px;display:grid;gap:9px}
+    main{flex:1;padding:24px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.top h1{margin:0;font-size:clamp(24px,4vw,38px)}.top p{margin:5px 0 0;color:var(--muted)}.userpill{padding:9px 12px;border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;font-size:13px}
+    .hero{padding:24px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(196,108,255,.17),rgba(95,114,255,.11));box-shadow:var(--shadow);margin-bottom:20px}.hero h2{margin:0 0 7px}.hero p{margin:0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}.tool{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(14px);border-radius:20px;padding:18px;cursor:pointer;transition:.22s}.tool:hover{transform:translateY(-3px);background:var(--card2);box-shadow:0 18px 45px rgba(0,0,0,.28)}.tool .big{font-size:28px}.tool h3{margin:10px 0 5px}.tool p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.badge{display:inline-block;margin-top:12px;font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:#ddd}.disabled{opacity:.45;cursor:not-allowed}
+    .panel{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(16px);border-radius:24px;padding:20px;box-shadow:var(--shadow)}.panel-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px}.panel-head h2{margin:0}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:150px}.result{margin-top:18px}.result pre{margin:0;white-space:pre-wrap;word-break:break-word;background:rgba(0,0,0,.28);border:1px solid var(--line);padding:16px;border-radius:16px;max-height:55vh;overflow:auto;color:#eee;font-size:12px;line-height:1.55}.status{margin-top:10px;color:var(--muted);font-size:13px}.img-result{max-width:100%;border-radius:16px;border:1px solid var(--line);display:block}.tool-note{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px}
+    /* ===== Glow upgrade ===== */
+    .btn{box-shadow:0 10px 28px rgba(126,91,255,.22),0 0 18px rgba(197,108,255,.28)}
+    .btn:hover{box-shadow:0 10px 34px rgba(126,91,255,.35),0 0 26px rgba(197,108,255,.5)}
+    .logo span{text-shadow:0 0 18px rgba(217,149,255,.65)}
+    .tool:hover{box-shadow:0 18px 45px rgba(0,0,0,.28),0 0 24px rgba(126,91,255,.28)}
+    .panel{position:relative}.panel::before{content:'';position:absolute;inset:-1px;border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(197,108,255,.35),rgba(110,124,255,.05) 40%,transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    /* ===== Poster grid (Otaku, dsb) ===== */
+    .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin-top:4px}
+    .pcard{cursor:pointer;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card2);transition:.2s}
+    .pcard:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.35),0 0 18px rgba(197,108,255,.25)}
+    .pthumb{aspect-ratio:2/3;background-size:cover;background-position:center;background-color:rgba(255,255,255,.05)}
+    .pinfo{padding:9px 10px}.pinfo b{display:block;font-size:12.5px;line-height:1.3;max-height:2.6em;overflow:hidden}.pinfo span{display:block;margin-top:4px;font-size:11px;color:var(--muted)}
+    .section-title{margin:22px 0 12px;font-size:15px;color:#e9e3ff}
+    .backbtn{background:rgba(255,255,255,.08);border:1px solid var(--line);color:#eee;border-radius:12px;padding:8px 13px;cursor:pointer;margin-bottom:14px;display:inline-flex;align-items:center;gap:6px}
+    .detail-head{display:flex;gap:16px;flex-wrap:wrap}.detail-thumb{width:150px;border-radius:16px;flex:none;box-shadow:0 0 24px rgba(197,108,255,.25)}
+    .episode-list{display:grid;gap:8px;margin-top:14px}.episode-item{padding:11px 14px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.04);cursor:pointer;display:flex;justify-content:space-between;align-items:center}.episode-item:hover{background:rgba(255,255,255,.09)}
+    .player-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 0 30px rgba(110,124,255,.28);background:#000}.player-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .mirror-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.mirror-row button{border:1px solid var(--line);background:rgba(255,255,255,.06);color:#eee;border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer}.mirror-row button.active{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
+    /* ===== Chat widget (floating) ===== */
+    .chat-bubble{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.4),0 0 26px rgba(197,108,255,.55);z-index:40;font-size:24px;border:0}
+    .chat-bubble:hover{filter:brightness(1.1)}
+    .chat-panel{position:fixed;right:18px;bottom:86px;width:min(340px,calc(100vw - 36px));height:min(460px,60vh);background:rgba(9,7,20,.92);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow),0 0 30px rgba(197,108,255,.25);z-index:40;display:flex;flex-direction:column;overflow:hidden;transform:translateY(12px);opacity:0;pointer-events:none;transition:.2s}
+    .chat-panel.open{transform:translateY(0);opacity:1;pointer-events:auto}
+    .chat-panel-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-weight:800}
+    .chat-panel-body{flex:1;overflow:auto;padding:12px;display:grid;gap:8px}
+    .chat-panel-foot{padding:10px;border-top:1px solid var(--line);display:flex;gap:8px}
+    .chat-panel-foot input{flex:1;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;border-radius:12px;padding:10px 12px;outline:none}
+    .chat-msg{padding:8px 11px;border-radius:13px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:13px}
+    .chat-msg b{font-size:12px}.chat-msg .txt{margin-top:3px;white-space:pre-wrap;word-break:break-word}
+    /* ===== Profile ===== */
+    .profile-card{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .avatar-circle{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:28px;font-weight:900;box-shadow:0 0 26px rgba(197,108,255,.4)}
+    .profile-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px}.profile-row:last-child{border-bottom:0}.profile-row span:first-child{color:var(--muted)}
+    .mobile-nav{display:none}
+    @media(max-width:850px){.side{display:none}.mobile-nav{display:flex;position:fixed;z-index:10;left:12px;right:12px;bottom:12px;padding:8px;gap:6px;border:1px solid var(--line);background:rgba(9,7,20,.82);backdrop-filter:blur(18px);border-radius:18px}.mobile-nav button{flex:1;border:0;background:transparent;color:#ddd;padding:9px 5px;border-radius:12px;font-size:11px}.mobile-nav button.active{background:rgba(255,255,255,.1)}main{padding:18px 15px 92px}.top{align-items:flex-start}.userpill{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tool{padding:14px}.tool h3{font-size:15px}.tool p{font-size:12px}}
+    @media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.row>*{min-width:100%}}
+  </style>
+</head>
+<body>
+  <section id="login" class="login">
+    <div class="login-card">
+      <div class="logo">WANZZY <span>TOOLS</span></div>
+      <div class="sub">Serbaguna • Anime • Movie • AI • Upload</div>
+      <form id="loginForm">
+        <div class="field"><label>Username</label><input id="username" autocomplete="username" placeholder="Username" required></div>
+        <div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Password" required></div>
+        <button class="btn" style="width:100%">LOGIN</button><div id="loginError" class="error"></div><div style="text-align:center;margin-top:14px"><button type="button" id="showRegister" class="btn secondary">Buat akun baru</button></div>
+      </form>
+    </div>
+    <div id="registerCard" class="login-card hidden" style="margin-top:14px">
+      <div class="logo">BUAT <span>AKUN</span></div>
+      <div class="sub">Daftar sebagai User. Admin dapat dibuat oleh admin dari menu Kelola Akun.</div>
+      <form id="registerForm">
+        <div class="field"><label>Username</label><input id="regUsername" autocomplete="username" placeholder="Username" required></div>
+        <div class="field"><label>Password</label><input id="regPassword" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter" required></div>
+        <button class="btn" style="width:100%">DAFTAR</button><div id="registerError" class="error"></div>
+      </form>
+      <button type="button" id="backLogin" class="btn secondary" style="width:100%;margin-top:10px">Kembali ke Login</button>
+    </div>
+  </section>
+
+  <section id="app" class="app hidden">
+    <aside class="side"><div class="brand"><div class="logo">WANZZY</div><small>MULTI TOOLS PANEL</small></div><nav id="nav" class="nav"></nav><div class="side-foot"><button id="logout" class="btn danger">↪ Logout</button></div></aside>
+    <main><div class="top"><div><h1 id="title">Dashboard</h1><p id="subtitle">Pilih tools yang ingin digunakan.</p></div><div class="userpill" id="userPill">● wanzzy</div></div><div id="content"></div></main>
+    <nav id="mobileNav" class="mobile-nav"></nav>
+    <button id="chatBubble" class="chat-bubble hidden" title="Chat">💬</button>
+    <div id="chatPanel" class="chat-panel">
+      <div class="chat-panel-head"><span>💬 Chat</span><button class="btn secondary" id="chatClose" style="padding:5px 10px">✕</button></div>
+      <div id="chatPanelBody" class="chat-panel-body"><div class="tool-note">Memuat...</div></div>
+      <form id="chatPanelForm" class="chat-panel-foot"><input id="chatPanelInput" maxlength="500" placeholder="Tulis pesan..." required><button class="btn" style="flex:0 0 auto">➤</button></form>
+    </div>
+  </section>
+<script>
+const $=s=>document.querySelector(s); const tokenKey='wanzzy_token';
+const tools=[
+{id:'dashboard',icon:'⌂',name:'Dashboard',desc:'Beranda dan semua tools.'},
+{id:'rewind',icon:'✦',name:'Rewind AI',desc:'Chat AI dari API Rewind.'},
+{id:'otaku',icon:'◈',name:'OtakuDesu',desc:'Home, search, info, genre & watch.'},
+{id:'movies',icon:'🎬',name:'Movies',desc:'Popular, latest, search & detail.'},
+{id:'hdhub',icon:'▣',name:'HDHub4u',desc:'Home, pencarian dan detail film.'},
+{id:'komik',icon:'漫画',name:'Komik',desc:'Manga, manhwa, top & search.'},
+{id:'anime',icon:'⛩',name:'Anime',desc:'Nonton anime: beranda, cari, detail & player video.'},
+{id:'tiktok',icon:'♪',name:'TikTok',desc:'Proses link TikTok.'},
+{id:'catbox',icon:'☁',name:'Catbox',desc:'Upload file ke Catbox.'},
+{id:'iqc',icon:'▤',name:'IQC Maker',desc:'Buat gambar chat IQC.'},
+{id:'alightmotion',icon:'✦',name:'AlightMotion',desc:'Kirim dan verifikasi magic link.'},
+{id:'spotify',icon:'♫',name:'Spotify Downloader',desc:'Cari & download lagu dari Spotify jadi MP3.'},
+{id:'profile',icon:'◍',name:'Profil',desc:'Info akun kamu.'},
+{id:'accounts',icon:'👥',name:'Kelola Akun',desc:'Buat akun User/Admin dan atur centang biru.'},
+{id:'mimo',icon:'AI',name:'MiMo AI',desc:'Modul sumber diunggah, tetapi tidak diaktifkan di dashboard.' ,disabled:true}
+];
+function api(path,body,opts={}){const isForm=body instanceof FormData;const headers={'Authorization':'Bearer '+localStorage.getItem(tokenKey),...(opts.headers||{})};if(!isForm)headers['Content-Type']='application/json';return fetch(path,{method:'POST',headers,body:isForm?body:JSON.stringify(body)})}
+function setView(id){const t=tools.find(x=>x.id===id)||tools[0]; $('#title').textContent=t.name; $('#subtitle').textContent=t.desc; document.querySelectorAll('[data-nav]').forEach(b=>b.classList.toggle('active',b.dataset.nav===id)); if(id==='dashboard')return dashboard(); if(id==='profile')return profile(); if(id==='accounts')return accounts(); if(t.disabled)return panel('<div class="tool-note">Modul MiMo AI yang diunggah memakai payload kredensial/premium tersandi. Demi keamanan, modul tersebut tidak dieksekusi oleh panel ini.</div>'); ({rewind,otaku,movies,hdhub,komik,anime,tiktok,catbox,iqc,alightmotion,spotify}[id])();}
+function nav(){const html=tools.map(t=>`<button data-nav="${t.id}" ${t.disabled?'disabled':''}><span class="ico">${t.icon}</span>${t.name}</button>`).join(''); $('#nav').innerHTML=html; $('#mobileNav').innerHTML=html; document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>!b.disabled&&setView(b.dataset.nav));}
+function panel(inner){$('#content').innerHTML=`<div class="panel">${inner}</div>`}
+function dashboard(){ $('#content').innerHTML=`<div class="hero"><h2>Selamat datang di WANZZY Multi Tools 👋</h2><p>Semua menu dikumpulkan dalam satu dashboard dengan tampilan glassmorphism.</p></div><div class="grid">${tools.filter(t=>t.id!=='dashboard').map(t=>`<article class="tool ${t.disabled?'disabled':''}" onclick="${t.disabled?'':'setView(\''+t.id+'\')'}"><div class="big">${t.icon}</div><h3>${t.name}</h3><p>${t.desc}</p><span class="badge">${t.disabled?'DISABLED':'OPEN TOOL'}</span></article>`).join('')}</div>`}
+function form(title,fields,button='Jalankan'){panel(`<div class="panel-head"><h2>${title}</h2></div><form id="toolForm">${fields}</form><div id="result" class="result"></div>`); return $('#toolForm')}
+function out(data){$('#result').innerHTML=`<pre>${escapeHtml(typeof data==='string'?data:JSON.stringify(data,null,2))}</pre>`}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function rewind(){const f=form('Rewind AI',`<div class="field"><label>Prompt</label><textarea id="prompt" placeholder="Tulis pertanyaan..." required></textarea></div><button class="btn">Kirim</button>`);f.onsubmit=async e=>{e.preventDefault();$('#result').textContent='Memproses...';try{out(await (await api('/api/rewind',{prompt:$('#prompt').value})).json())}catch(e){out(e.message)}}}
+function posterGrid(items){return `<div class="pgrid">${items.map((it,i)=>`<div class="pcard" data-i="${i}"><div class="pthumb" style="background-image:url('${escapeHtml(it.thumb||'')}')"></div><div class="pinfo"><b>${escapeHtml(it.title||'-')}</b><span>${escapeHtml(it.label||'')}</span></div></div>`).join('')}</div>`}
+function bindGrid(container,items,onOpen){container.querySelectorAll('[data-i]').forEach(el=>el.onclick=()=>onOpen(items[Number(el.dataset.i)]))}
+function mapOtaku(it){return {title:it.title,url:it.url,thumb:it.thumb,label:it.episode?('Eps '+it.episode):(it.rating?('★ '+it.rating):(it.day||it.date||'')),raw:it}}
+function mapNontonAnime(it){return {title:it.title,url:it.link,thumb:it.image,label:it.episode||it.score||it.status||'',raw:it}}
+function otaku(){
+  panel(`<div class="panel-head"><h2>⛩ OtakuDesu</h2></div><div class="row" style="margin-bottom:14px"><input id="otakuQ" placeholder="Cari judul anime..."><button class="btn secondary" id="otakuSearchBtn" style="flex:0 0 auto">Cari</button></div><div id="otakuBody"><div class="tool-note">Memuat beranda...</div></div>`);
+  const body=$('#otakuBody');
+  async function showHome(){
+    body.innerHTML='<div class="tool-note">Memuat beranda...</div>';
+    const d=await (await api('/api/otaku',{action:'home'})).json();
+    if(!d.success){body.innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal memuat data. Coba lagi nanti.')}</div>`;return}
+    const ongoing=d.ongoing||[],complete=d.complete||[];
+    if(!ongoing.length&&!complete.length){body.innerHTML='<div class="tool-note">Belum ada data yang bisa ditampilkan.</div>';return}
+    const ongoingM=ongoing.map(mapOtaku),completeM=complete.map(mapOtaku);
+    body.innerHTML=`${ongoingM.length?`<h3 class="section-title">Sedang Tayang</h3>${posterGrid(ongoingM)}`:''}${completeM.length?`<h3 class="section-title">Tamat</h3>${posterGrid(completeM)}`:''}`;
+    const sections=body.querySelectorAll('.pgrid');
+    if(ongoingM.length)bindGrid(sections[0],ongoingM,showDetail);
+    if(completeM.length)bindGrid(sections[ongoingM.length?1:0],completeM,showDetail);
+  }
+  async function showSearch(q){
+    body.innerHTML='<div class="tool-note">Mencari...</div>';
+    const d=await (await api('/api/otaku',{action:'search',query:q})).json();
+    if(!d.success){body.innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal mencari.')}</div>`;return}
+    const items=(d.items||[]).map(mapOtaku);
+    if(!items.length){body.innerHTML='<div class="tool-note">Tidak ada hasil ditemukan.</div>';return}
+    body.innerHTML=`<button class="backbtn" id="backHome">← Kembali</button>${posterGrid(items)}`;
+    $('#backHome').onclick=showHome; bindGrid(body,items,showDetail);
+  }
+  async function showDetail(item){
+    body.innerHTML='<div class="tool-note">Memuat detail...</div>';
+    const d=await (await api('/api/otaku',{action:'info',url:item.url})).json();
+    if(!d.success){body.innerHTML=`<button class="backbtn" id="backHome">← Kembali</button><div class="tool-note">${escapeHtml(d.error||'Gagal memuat detail.')}</div>`;$('#backHome').onclick=showHome;return}
+    const genres=(d.genres||[]).map(g=>escapeHtml(g.name)).join(', ');
+    const episodes=d.episodes||[];
+    body.innerHTML=`<button class="backbtn" id="backHome">← Kembali</button><div class="detail-head"><img class="detail-thumb" src="${escapeHtml(d.thumb||'')}" alt=""><div><h2 style="margin:0 0 8px">${escapeHtml(d.title||'')}</h2>${genres?`<p class="tool-note">Genre: ${genres}</p>`:''}<p style="white-space:pre-wrap;word-break:break-word;font-size:13.5px;color:var(--muted)">${escapeHtml(d.synopsis||'')}</p></div></div><h3 class="section-title">Daftar Episode</h3><div class="episode-list">${episodes.map((ep,i)=>`<div class="episode-item" data-i="${i}"><span>${escapeHtml(ep.title||'Episode')}</span><span class="tool-note">${escapeHtml(ep.date||'')}</span></div>`).join('')||'<div class="tool-note">Belum ada episode.</div>'}</div>`;
+    $('#backHome').onclick=showHome;
+    body.querySelectorAll('.episode-item').forEach(el=>el.onclick=()=>showWatch(episodes[Number(el.dataset.i)],()=>showDetail(item)));
+  }
+  async function showWatch(ep,onBack){
+    body.innerHTML='<div class="tool-note">Menyiapkan video...</div>';
+    const d=await (await api('/api/otaku',{action:'watch',url:ep.url})).json();
+    if(!d.success||(!d.embedIframe&&!(d.mirrors||[]).some(m=>m.streamUrl))){body.innerHTML=`<button class="backbtn" id="backDetail">← Kembali</button><div class="tool-note">${escapeHtml((d&&d.error)||'Video tidak tersedia untuk episode ini. Coba mirror lain atau episode lain.')}</div>`;$('#backDetail').onclick=onBack;return}
+    const mirrors=(d.mirrors||[]).filter(m=>m.streamUrl);
+    const initial=d.embedIframe||mirrors[0]?.streamUrl;
+    body.innerHTML=`<button class="backbtn" id="backDetail">← Kembali</button><h2 style="margin:0 0 12px">${escapeHtml(d.title||'')}</h2><div class="player-wrap"><iframe id="playerFrame" src="${escapeHtml(initial)}" allowfullscreen referrerpolicy="no-referrer"></iframe></div>${mirrors.length?`<div class="mirror-row">${mirrors.map((m,i)=>`<button data-src="${escapeHtml(m.streamUrl)}" class="${m.streamUrl===initial?'active':''}">${escapeHtml(m.resolution)} • ${escapeHtml(m.service)}</button>`).join('')}</div>`:''}`;
+    $('#backDetail').onclick=onBack;
+    body.querySelectorAll('.mirror-row button').forEach(b=>b.onclick=()=>{$('#playerFrame').src=b.dataset.src;body.querySelectorAll('.mirror-row button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+  }
+  $('#otakuSearchBtn').onclick=()=>{const q=$('#otakuQ').value.trim();if(q)showSearch(q)};
+  $('#otakuQ').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#otakuSearchBtn').click()}};
+  showHome();
+}
+function mapMovie(it){return {title:it.title,url:it.slug||it.url,thumb:it.poster,label:it.rating?('★ '+it.rating):(it.year||''),raw:it}}
+function movies(){
+  panel(`<div class="panel-head"><h2>🎬 Movies</h2></div><div class="row" style="margin-bottom:14px"><input id="movieQ" placeholder="Cari judul film..."><button class="btn secondary" id="movieSearchBtn" style="flex:0 0 auto">Cari</button></div><div class="row" style="margin-bottom:14px" id="movieTypeRow"><select id="movieListType"><option value="popular">Popular</option><option value="latest">Latest</option><option value="top-rated">Top Rated</option><option value="upcoming">Upcoming</option></select></div><div id="movieBody"><div class="tool-note">Memuat...</div></div>`);
+  const body=$('#movieBody');
+  async function showList(type){
+    body.innerHTML='<div class="tool-note">Memuat...</div>';
+    const r=await api('/api/movies',{action:'list',listType:type});const d=await r.json();
+    if(!d.success){body.innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal memuat data.')}</div>`;return}
+    const items=(d.result||[]).map(mapMovie);
+    if(!items.length){body.innerHTML='<div class="tool-note">Belum ada data.</div>';return}
+    body.innerHTML=posterGrid(items); bindGrid(body,items,showDetail);
+  }
+  async function showSearch(q){
+    body.innerHTML='<div class="tool-note">Mencari...</div>';
+    const r=await api('/api/movies',{action:'search',query:q});const d=await r.json();
+    if(!d.success){body.innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal mencari.')}</div>`;return}
+    const items=(d.result||[]).map(mapMovie);
+    if(!items.length){body.innerHTML='<div class="tool-note">Tidak ada hasil ditemukan.</div>';return}
+    body.innerHTML=`<button class="backbtn" id="backList">← Kembali</button>${posterGrid(items)}`;
+    $('#backList').onclick=()=>showList($('#movieListType').value); bindGrid(body,items,showDetail);
+  }
+  async function showDetail(item){
+    body.innerHTML='<div class="tool-note">Memuat detail...</div>';
+    const r=await api('/api/movies',{action:'get',url:item.url});const d=await r.json();
+    const m=d.success?d.results:null;
+    if(!m){body.innerHTML=`<button class="backbtn" id="backList">← Kembali</button><div class="tool-note">${escapeHtml((d&&d.error)||'Gagal memuat detail.')}</div>`;$('#backList').onclick=()=>showList($('#movieListType').value);return}
+    const embed=m.embed||m.player||m.stream||m.iframe||null;
+    const downloads=Array.isArray(m.downloads)?m.downloads:(Array.isArray(m.download_links)?m.download_links:[]);
+    body.innerHTML=`<button class="backbtn" id="backList">← Kembali</button><div class="detail-head"><img class="detail-thumb" src="${escapeHtml(m.poster||'')}" alt=""><div><h2 style="margin:0 0 8px">${escapeHtml(m.title||'')}</h2><p class="tool-note">${escapeHtml([m.year,m.genre,m.duration].filter(Boolean).join(' • '))}</p>${m.rating?`<p class="tool-note">★ ${escapeHtml(m.rating)}</p>`:''}<p style="white-space:pre-wrap;word-break:break-word;font-size:13.5px;color:var(--muted)">${escapeHtml(m.synopsis||'')}</p></div></div>${embed?`<h3 class="section-title">Nonton</h3><div class="player-wrap"><iframe src="${escapeHtml(embed)}" allowfullscreen referrerpolicy="no-referrer"></iframe></div>`:'<p class="tool-note">Sumber film ini tidak menyediakan pemutar video langsung — cek link download di bawah jika tersedia.</p>'}${downloads.length?`<h3 class="section-title">Download</h3><div class="row">${downloads.map(dl=>`<a class="btn secondary" href="${escapeHtml(dl.url||dl.link||'#')}" target="_blank" rel="noopener" style="text-decoration:none;text-align:center">${escapeHtml(dl.label||dl.quality||'Download')}</a>`).join('')}</div>`:''}`;
+    $('#backList').onclick=()=>showList($('#movieListType').value);
+  }
+  $('#movieSearchBtn').onclick=()=>{const q=$('#movieQ').value.trim();if(q)showSearch(q)};
+  $('#movieQ').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#movieSearchBtn').click()}};
+  $('#movieListType').onchange=()=>showList($('#movieListType').value);
+  showList('popular');
+}
+function hdhub(){const f=form('HDHub4u',`<div class="row"><div class="field"><label>Action</label><select id="action"><option value="home">Home</option><option value="search">Search</option><option value="detail">Detail URL</option></select></div><div class="field"><label>Query / URL</label><input id="q"></div><div class="field"><label>Page</label><input id="page" type="number" value="1"></div></div><button class="btn">Jalankan</button>`);f.onsubmit=async e=>{e.preventDefault();$('#result').textContent='Memproses...';out(await (await api('/api/hdhub4u',{action:$('#action').value,query:$('#q').value,url:$('#q').value,page:$('#page').value})).json())}}
+function komik(){const f=form('Komik',`<div class="row"><div class="field"><label>Action</label><select id="action"><option value="home">Home</option><option value="top">Top</option><option value="manhwa">Manhwa</option><option value="list">List</option><option value="search">Search</option></select></div><div class="field"><label>Query</label><input id="q"></div><div class="field"><label>Period</label><select id="period"><option>weekly</option><option>daily</option><option>alltime</option></select></div></div><button class="btn">Jalankan</button>`);f.onsubmit=async e=>{e.preventDefault();$('#result').textContent='Memproses...';out(await (await api('/api/komik',{action:$('#action').value,query:$('#q').value,period:$('#period').value})).json())}}
+function anime(){
+  panel(`<div class="panel-head"><h2>⛩ Anime</h2></div><div class="row" style="margin-bottom:14px"><input id="animeQ" placeholder="Cari judul anime..."><button class="btn secondary" id="animeSearchBtn" style="flex:0 0 auto">Cari</button></div><div id="animeBody"><div class="tool-note">Memuat beranda...</div></div>`);
+  const body=$('#animeBody');
+  function section(title,items){return items.length?`<h3 class="section-title">${title}</h3>${posterGrid(items)}`:''}
+  async function showHome(){
+    body.innerHTML='<div class="tool-note">Memuat beranda...</div>';
+    const r=await api('/api/nontonanime',{action:'home'});const d=await r.json();
+    if(!d.success){body.innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal memuat data. Coba lagi nanti.')}</div>`;return}
+    const groups=[['Episode Terbaru',d.episode_terbaru],['Series TV',d.series_terbaru_tv],['Series Movie',d.series_terbaru_movie],['Populer',d.popular_series_semua]].map(([t,arr])=>[t,(arr||[]).map(mapNontonAnime)]);
+    if(!groups.some(([,arr])=>arr.length)){body.innerHTML='<div class="tool-note">Belum ada data yang bisa ditampilkan.</div>';return}
+    body.innerHTML=groups.map(([t,arr])=>section(t,arr)).join('');
+    const sections=body.querySelectorAll('.pgrid');let idx=0;
+    groups.forEach(([,arr])=>{if(arr.length){bindGrid(sections[idx],arr,showDetail);idx++}});
+  }
+  async function showSearch(q){
+    body.innerHTML='<div class="tool-note">Mencari...</div>';
+    const r=await api('/api/nontonanime',{action:'search',query:q});const d=await r.json();
+    if(!d.success){body.innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal mencari.')}</div>`;return}
+    const items=(d.items||[]).map(mapNontonAnime);
+    if(!items.length){body.innerHTML='<div class="tool-note">Tidak ada hasil ditemukan.</div>';return}
+    body.innerHTML=`<button class="backbtn" id="backHome">← Kembali</button>${posterGrid(items)}`;
+    $('#backHome').onclick=showHome; bindGrid(body,items,showDetail);
+  }
+  async function showDetail(item){
+    body.innerHTML='<div class="tool-note">Memuat detail...</div>';
+    const r=await api('/api/nontonanime',{action:'detail',url:item.url});const d=await r.json();
+    if(!d.success){body.innerHTML=`<button class="backbtn" id="backHome">← Kembali</button><div class="tool-note">${escapeHtml(d.error||'Gagal memuat detail.')}</div>`;$('#backHome').onclick=showHome;return}
+    const genres=(d.genres||[]).map(g=>escapeHtml(g.name)).join(', ');
+    const episodes=d.episodes||[];
+    body.innerHTML=`<button class="backbtn" id="backHome">← Kembali</button><div class="detail-head"><img class="detail-thumb" src="${escapeHtml(d.poster||'')}" alt=""><div><h2 style="margin:0 0 8px">${escapeHtml(d.title||'')}</h2>${genres?`<p class="tool-note">Genre: ${genres}</p>`:''}${d.score?`<p class="tool-note">★ ${escapeHtml(d.score)}</p>`:''}<p style="white-space:pre-wrap;word-break:break-word;font-size:13.5px;color:var(--muted)">${escapeHtml(d.synopsis||'')}</p></div></div><h3 class="section-title">Daftar Episode</h3><div class="episode-list">${episodes.map((ep,i)=>`<div class="episode-item" data-i="${i}"><span>${escapeHtml(ep.title||'Episode')}</span><span class="tool-note">${escapeHtml(ep.date||'')}</span></div>`).join('')||'<div class="tool-note">Belum ada episode.</div>'}</div>`;
+    $('#backHome').onclick=showHome;
+    body.querySelectorAll('.episode-item').forEach(el=>el.onclick=()=>showWatch(episodes[Number(el.dataset.i)],()=>showDetail(item)));
+  }
+  async function showWatch(ep,onBack){
+    body.innerHTML='<div class="tool-note">Menyiapkan video...</div>';
+    const r=await api('/api/nontonanime',{action:'watch',url:ep.link||ep.url});const d=await r.json();
+    if(!d.success||!d.default_video_url){body.innerHTML=`<button class="backbtn" id="backDetail">← Kembali</button><div class="tool-note">${escapeHtml((d&&d.error)||'Video tidak tersedia untuk episode ini. Coba episode lain.')}</div>`;$('#backDetail').onclick=onBack;return}
+    const servers=d.video_servers||[];
+    body.innerHTML=`<button class="backbtn" id="backDetail">← Kembali</button><h2 style="margin:0 0 12px">${escapeHtml(d.title||'')}</h2><div class="player-wrap"><iframe id="playerFrame" src="${escapeHtml(d.default_video_url)}" allowfullscreen referrerpolicy="no-referrer"></iframe></div>${servers.length?`<div class="mirror-row">${servers.map((s,i)=>`<button data-i="${i}" class="${s.is_active?'active':''}">${escapeHtml(s.server_name)}</button>`).join('')}</div>`:''}`;
+    $('#backDetail').onclick=onBack;
+    body.querySelectorAll('.mirror-row button').forEach(b=>b.onclick=async()=>{const s=servers[Number(b.dataset.i)];b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const rr=await api('/api/nontonanime',{action:'server',postId:s.post_id,nume:s.nume,serverName:s.server_type||s.server_name,nonce:d.nonce,ajaxUrl:d.ajax_url});const dd=await rr.json();if(dd.success&&dd.iframe)$('#playerFrame').src=dd.iframe});
+  }
+  $('#animeSearchBtn').onclick=()=>{const q=$('#animeQ').value.trim();if(q)showSearch(q)};
+  $('#animeQ').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#animeSearchBtn').click()}};
+  showHome();
+}
+function tiktok(){const f=form('TikTok Downloader',`<div class="field"><label>Link TikTok</label><input id="url" placeholder="https://www.tiktok.com/..." required></div><button class="btn">Proses</button>`);f.onsubmit=async e=>{e.preventDefault();$('#result').textContent='Memproses...';out(await (await api('/api/tiktok',{url:$('#url').value})).json())}}
+function catbox(){panel(`<div class="panel-head"><h2>Catbox Uploader</h2></div><form id="toolForm"><div class="field"><label>Pilih file</label><input id="file" type="file" required></div><button class="btn">Upload</button></form><div id="result" class="result"></div>`);$('#toolForm').onsubmit=async e=>{e.preventDefault();const fd=new FormData();fd.append('file',$('#file').files[0]);$('#result').textContent='Uploading...';const r=await api('/api/catbox',fd);out(await r.json())}}
+function iqc(){const f=form('IQC Maker',`<div class="row"><div class="field"><label>Sender</label><select id="sender"><option value="self">self</option><option value="other">other</option></select></div><div class="field"><label>Message</label><input id="message" value="Halo bang!" required></div><div class="field"><label>Time</label><input id="time" value="21:02"></div></div><div class="row"><div class="field"><label>Carrier</label><input id="carrier" value="INDOSAT"></div><div class="field"><label>Battery</label><input id="battery" type="number" value="88"></div><div class="field"><label>Signal 0-5</label><input id="signalStrength" type="number" min="0" max="5" value="4"></div></div><button class="btn">Generate</button>`);f.onsubmit=async e=>{e.preventDefault();$('#result').textContent='Generating...';const body={sender:$('#sender').value,message:$('#message').value,time:$('#time').value,timestamp:$('#time').value,carrier:$('#carrier').value,battery:Number($('#battery').value),signalStrength:Number($('#signalStrength').value),wifi:true,darkMode:true,isDark:true,readStatus:true,emojiStyle:'apple'};const r=await api('/api/iqc',body);if(r.ok){const blob=await r.blob();const url=URL.createObjectURL(blob);$('#result').innerHTML=`<img class="img-result" src="${url}" alt="IQC result"><p><a class="btn" href="${url}" download="iqc.png" style="display:inline-block;margin-top:12px;text-decoration:none">Simpan PNG</a></p>`}else out(await r.text())}}
+function alightmotion(){panel(`<div class="panel-head"><h2>AlightMotion Premium Generator</h2><p>Kirim magic link lalu masukkan link yang diterima.</p></div><div class="field"><label>Email</label><input id="amEmail" type="email" placeholder="email@example.com" required></div><div class="row"><button class="btn" id="amSend">Kirim Magic Link</button><button class="btn secondary" id="amVerify" type="button">Verifikasi</button></div><div class="field"><label>Magic Link</label><input id="amLink" placeholder="Tempel magic link di sini"></div><div id="result" class="result"></div>`);$('#amSend').onclick=async()=>{const email=$('#amEmail').value.trim();if(!email){$('#result').textContent='Email wajib diisi.';return}$('#result').textContent='Mengirim...';const r=await api('/api/alightmotion',{action:'send',email});out(await r.json())};$('#amVerify').onclick=async()=>{const email=$('#amEmail').value.trim();const link=$('#amLink').value.trim();if(!email||!link){$('#result').textContent='Email dan magic link wajib diisi.';return}$('#result').textContent='Memverifikasi...';const r=await api('/api/alightmotion',{action:'verify',email,link});out(await r.json())}}
+function spotify(){
+  panel(`<div class="panel-head"><h2>♫ Spotify Downloader</h2></div><div class="field"><label>Judul lagu atau link Spotify</label><input id="spQuery" placeholder="Judul lagu / https://open.spotify.com/track/..." required></div><button class="btn" id="spSearchBtn">Cari</button><div id="result" class="result"></div>`);
+  let lastSessionCookie=null;
+  $('#spSearchBtn').onclick=async()=>{
+    const q=$('#spQuery').value.trim(); if(!q)return;
+    $('#result').innerHTML='<div class="tool-note">Mencari...</div>';
+    const r=await api('/api/spotify',{action:'search',query:q}); const d=await r.json();
+    if(!d.success){$('#result').innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal mencari.')}</div>`;return}
+    lastSessionCookie=d.sessionCookie;
+    const items=d.items||[];
+    if(!items.length){$('#result').innerHTML='<div class="tool-note">Tidak ada hasil ditemukan.</div>';return}
+    $('#result').innerHTML=`<div style="display:grid;gap:10px">${items.map((t,i)=>`<div style="display:flex;gap:12px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:14px"><img src="${escapeHtml(t.cover||'')}" style="width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none"><div style="flex:1;min-width:0"><b style="display:block;font-size:13.5px">${escapeHtml(t.name||'-')}</b><span class="tool-note">${escapeHtml(t.artist||'')}${t.duration?' • '+escapeHtml(t.duration):''}</span></div><button class="btn secondary" data-i="${i}" style="flex:none">Download</button></div>`).join('')}</div><div id="spLinkResult" style="margin-top:14px"></div>`;
+    $('#result').querySelectorAll('[data-i]').forEach(b=>b.onclick=async()=>{
+      const t=items[Number(b.dataset.i)]; b.textContent='Memproses...'; b.disabled=true;
+      const rr=await api('/api/spotify',{action:'download',form:t.form,sessionCookie:lastSessionCookie}); const dd=await rr.json();
+      b.disabled=false; b.textContent='Download';
+      const box=$('#spLinkResult');
+      if(!dd.success||!dd.links?.mp3){box.innerHTML=`<div class="tool-note">${escapeHtml((dd&&dd.error)||'Link download tidak ditemukan untuk lagu ini.')}</div>`;return}
+      box.innerHTML=`<a class="btn" href="${escapeHtml(dd.links.mp3)}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">⬇ Download MP3 — ${escapeHtml(t.name)}</a>`;
+    });
+  };
+  $('#spQuery').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#spSearchBtn').click()}};
+}
+let currentUser=null;
+function verifiedBadge(user){return user?.verified?'<svg title="Terverifikasi" viewBox="0 0 22 22" width="16" height="16" style="display:inline-block;vertical-align:-3px;margin-left:3px"><path fill="#1d9bf0" d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568-.54.354-.972.851-1.246 1.437-.607-.223-1.264-.27-1.897-.14-.634.132-1.218.437-1.687.882-.445.47-.75 1.053-.882 1.687-.13.633-.083 1.29.14 1.897-.586.274-1.084.705-1.438 1.246-.354.54-.551 1.17-.569 1.816.018.646.215 1.275.57 1.816.354.54.852.972 1.438 1.246-.223.607-.27 1.264-.14 1.897.132.634.437 1.217.882 1.687.47.444 1.053.75 1.687.882.633.13 1.29.083 1.897-.14.274.586.705 1.084 1.246 1.438.54.354 1.17.551 1.816.569.646-.018 1.273-.215 1.813-.57.54-.354.972-.852 1.246-1.438.607.223 1.264.27 1.897.14.634-.132 1.217-.437 1.687-.882.444-.47.75-1.053.882-1.687.13-.633.083-1.29-.14-1.897.586-.274 1.084-.705 1.438-1.246.354-.54.551-1.17.569-1.816z"/><path fill="#fff" d="M9.68 14.6l-3.28-3.28 1.06-1.06 2.22 2.22 4.86-4.86 1.06 1.06-5.92 5.92z"/></svg>':''}
+function profile(){
+  const u=currentUser||{};
+  const initial=(u.username||'?').slice(0,1).toUpperCase();
+  panel(`<div class="panel-head"><h2>◍ Profil</h2></div>
+    <div class="profile-card">
+      <div class="avatar-circle">${escapeHtml(initial)}</div>
+      <div><h2 style="margin:0 0 4px">${escapeHtml(u.username||'-')}${verifiedBadge(u)}</h2><p class="tool-note" style="margin:0">${u.owner?'Owner':(u.role||'').toUpperCase()}</p></div>
+    </div>
+    <div style="margin-top:20px">
+      <div class="profile-row"><span>Role</span><span>${escapeHtml((u.role||'-').toUpperCase())}${u.owner?' • OWNER':''}</span></div>
+      <div class="profile-row"><span>Status verifikasi</span><span>${u.verified?'Terverifikasi ✓':'Belum terverifikasi'}</span></div>
+      <div class="profile-row"><span>Bergabung sejak</span><span>${u.createdAt?new Date(u.createdAt).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}):'-'}</span></div>
+    </div>
+    ${u.owner?'':'<p class="tool-note" style="margin-top:16px">Ingin dapat centang biru? Hubungi owner lewat menu chat.</p>'}`);
+}
+let chatOpen=false, chatPoll=null;
+function initChatWidget(){
+  const bubble=$('#chatBubble'), panelEl=$('#chatPanel'), body=$('#chatPanelBody'), form=$('#chatPanelForm'), input=$('#chatPanelInput');
+  async function loadChat(){
+    const r=await api('/api/global-chat',undefined); const d=await r.json();
+    if(!d.success){body.innerHTML=`<div class="tool-note">${escapeHtml(d.error||'Gagal memuat chat')}</div>`;return}
+    body.innerHTML=(d.messages||[]).map(m=>`<div class="chat-msg"><b>${escapeHtml(m.username)}${verifiedBadge(m)}</b><div class="txt">${escapeHtml(m.message)}</div></div>`).join('')||'<div class="tool-note">Belum ada pesan. Mulai obrolan!</div>';
+    body.scrollTop=body.scrollHeight;
+  }
+  bubble.onclick=()=>{chatOpen=!chatOpen; panelEl.classList.toggle('open',chatOpen); if(chatOpen){loadChat(); if(!chatPoll)chatPoll=setInterval(loadChat,8000)} else if(chatPoll){clearInterval(chatPoll);chatPoll=null}};
+  $('#chatClose').onclick=()=>{chatOpen=false; panelEl.classList.remove('open'); if(chatPoll){clearInterval(chatPoll);chatPoll=null}};
+  form.onsubmit=async e=>{e.preventDefault(); const msg=input.value.trim(); if(!msg)return; const r=await api('/api/global-chat',{message:msg}); const d=await r.json(); if(!d.success){alert(d.error||'Gagal mengirim pesan.');return} input.value=''; await loadChat()};
+}
+function accounts(){if(currentUser?.role!=='admin')return panel('<h2>Akses ditolak</h2><p class="tool-note">Menu ini hanya untuk admin.</p>');panel(`<div class="panel-head"><h2>👥 Kelola Akun</h2><button class="btn secondary" id="refreshUsers">Refresh</button></div><form id="accountForm"><div class="row"><div class="field"><label>Username</label><input id="newUser" required></div><div class="field"><label>Password</label><input id="newPass" type="password" minlength="6" required></div><div class="field"><label>Role</label><select id="newRole"><option value="user">User</option><option value="admin">Admin</option></select></div></div><button class="btn">Buat Akun</button></form><div id="accountResult" class="result"></div>`);const load=async()=>{const r=await api('/api/accounts',undefined);const d=await r.json();if(!d.success){$('#accountResult').textContent=d.error;return}$('#accountResult').innerHTML=`<div style="display:grid;gap:8px">${d.users.map(u=>`<div style="padding:12px;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;gap:10px;justify-content:space-between"><div><b>${escapeHtml(u.username)}${verifiedBadge(u)}</b><div class="tool-note">${u.role.toUpperCase()}${u.owner?' • OWNER':''}</div></div>${(u.owner||!currentUser?.owner)?'':`<button class="btn ${u.verified?'danger':'secondary'}" data-verify="${escapeHtml(u.username)}">${u.verified?'Cabut ✓':'Beri ✓'}</button>`}</div>`).join('')}</div>`;document.querySelectorAll('[data-verify]').forEach(b=>b.onclick=async()=>{const r=await api('/api/verify-user',{username:b.dataset.verify,verified:!b.classList.contains('danger')});const d=await r.json();if(!d.success){alert(d.error||'Gagal mengubah centang.');return}load()})};$('#accountForm').onsubmit=async e=>{e.preventDefault();const r=await api('/api/accounts',{username:$('#newUser').value,password:$('#newPass').value,role:$('#newRole').value});const d=await r.json();$('#accountResult').textContent=d.success?'Akun berhasil dibuat.':(d.error||'Gagal');if(d.success){$('#newUser').value='';$('#newPass').value='';load()}};$('#refreshUsers').onclick=load;load()}
+$('#loginForm').onsubmit=async e=>{e.preventDefault();$('#loginError').textContent='';const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:$('#username').value,password:$('#password').value})});const d=await r.json();if(d.success){localStorage.setItem(tokenKey,d.token);showApp()}else $('#loginError').textContent=d.error||'Login gagal.'};
+$('#registerForm').onsubmit=async e=>{e.preventDefault();$('#registerError').textContent='';const r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:$('#regUsername').value,password:$('#regPassword').value})});const d=await r.json();if(d.success){localStorage.setItem(tokenKey,d.token);showApp()}else $('#registerError').textContent=d.error||'Pendaftaran gagal.'};
+$('#showRegister').onclick=()=>{$('#login').querySelector('.login-card').classList.add('hidden');$('#registerCard').classList.remove('hidden')};
+$('#backLogin').onclick=()=>{$('#registerCard').classList.add('hidden');$('#login').querySelector('.login-card').classList.remove('hidden')};
+async function showApp(){const r=await fetch('/api/me',{headers:{Authorization:'Bearer '+localStorage.getItem(tokenKey)}});if(!r.ok){localStorage.removeItem(tokenKey);return}const d=await r.json();currentUser=d.user;$('#userPill').innerHTML=`● ${escapeHtml(currentUser.username)}${verifiedBadge(currentUser)}`;$('#login').classList.add('hidden');$('#app').classList.remove('hidden');nav();document.querySelectorAll('[data-nav="accounts"]').forEach(b=>{if(currentUser.role!=='admin')b.style.display='none'});setView('dashboard');$('#chatBubble').classList.remove('hidden');initChatWidget()}
+$('#logout').onclick=async()=>{await fetch('/api/logout',{method:'POST',headers:{Authorization:'Bearer '+localStorage.getItem(tokenKey)}});localStorage.removeItem(tokenKey);$('#chatBubble').classList.add('hidden');$('#chatPanel').classList.remove('open');if(chatPoll){clearInterval(chatPoll);chatPoll=null}location.reload()};
+if(localStorage.getItem(tokenKey))showApp();
+</script>
+</body>
+</html>
